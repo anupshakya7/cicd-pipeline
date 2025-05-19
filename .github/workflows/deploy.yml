@@ -25,6 +25,9 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           source: "."
           target: "~/public_html/cicd-pipeline"
+          rm: false
+          strip_components: 1
+          exclude: ".env"
 
       # Step 3: SSH into the server and run the deploy script
       - name: Deploy to Server
@@ -36,5 +39,13 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           script: |
             cd ~/public_html/cicd-pipeline
+
+          # Write the .env file
+            echo "${{ secrets.ENV_PRODUCTION }}" > .env
+
+          # Fix permissions
+            chmod 600 .env
             chmod +x .scripts/deploy.sh
+
+          # Run your deployment script
             ./.scripts/deploy.sh
