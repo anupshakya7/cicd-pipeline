@@ -22,7 +22,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
-          key: ${{ screts.SSHKEY }}
+          key: ${{ secrets.SSHKEY }}
           source: "."
           target: "~/public_html/cicd-pipeline"
 
@@ -34,4 +34,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd ~/public_html/cicd-pipeline && ./.scripts/deploy.sh"
+          script: |
+            cd ~/public_html/cicd-pipeline
+            chmod +x .scripts/deploy.sh
+            ./.scripts/deploy.sh
