@@ -20,4 +20,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd /var/www/CICD-Pipeline && ./.scripts/deploy.sh"
+          script: "cd /var/www/cicd-pipeline && ./.scripts/deploy.sh"
